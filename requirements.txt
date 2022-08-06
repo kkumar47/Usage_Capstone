@@ -4,7 +4,6 @@ matplotlib
 seaborn
 numpy
 datetime
-calendar
 sklearn
 random
 tensorflow
