@@ -17,6 +17,7 @@ from tensorflow.keras.layers import Input, Dense, Dropout, Activation, Flatten, 
 #Define all the Sections
 header = st.container()
 cred = st.container()
+rawdata = st.container()
 
 with header:
 	font="sans serif"
@@ -35,3 +36,21 @@ with cred:
 		st.write('Wrong Token')
 		st.stop()
 	st.write('Credentials Correct')
+def raw_data():
+	return pd.read_csv('https://raw.githubusercontent.com/kkumar47/Usage_Capstone/master/Raw.txt.txt')
+def good_cust():
+	return pd.read_csv('https://raw.githubusercontent.com/kkumar47/Usage_Capstone/master/Fl_Good_Customer.csv')
+def bad_cust():
+	return pd.read_csv('https://raw.githubusercontent.com/kkumar47/Usage_Capstone/master/Fl_Bad_Customer.csv')
+
+rawdf = raw_data()
+baddf = bad_cust()
+gooddf = good_cust()
+
+with rawdata:
+	st.subheader("Electricity Usage History data for Customers", anchor ='The Data')
+	st.text('Raw Data')
+	#The raw data is displayed here
+	st.dataframe(rawdf.head(10))
+	rawd = rawdf.to_csv().encode('utf-8')
+	st.download_button('Download Data', data=rawd, file_name='Raw Data.csv', help='Download Data in CSV format')
