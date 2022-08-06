@@ -26,8 +26,8 @@ with header:
 with cred:
 	st.subheader('Login')
 	col1, col2 = st.columns(2)
-	owner = col1.text_input('Git Owner Name', value='', help='Enter User Id')
-	token = col2.text_input('Git Private Token', value='', help='Enter Password')
+	owner = col1.text_input('User Name', value='', help='Enter User Id')
+	token = col2.text_input('Password', value='', help='Enter Password')
 	if owner != 'sample':
 		st.write('Wrong User Name')
 		st.stop()
