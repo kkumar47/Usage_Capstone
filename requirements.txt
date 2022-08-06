@@ -5,5 +5,4 @@ seaborn
 numpy
 datetime
 sklearn
-random
 tensorflow
