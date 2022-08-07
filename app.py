@@ -100,20 +100,22 @@ with pprocess:
 		st.write('Click Start Process to continue')
 		
 with ousage:
-	st.subheader('Overall Usage of Customers')
-	col1, col2 = st.columns(2)
-	with col1:
-		sns.set_theme(style="whitegrid")
-		fig1 = plt.figure(figsize=(10,10))
-		sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
-		st.pyplot(fig1)
-	with col2:
-		sns.set_theme(style="whitegrid")
-		fig2 = plt.figure(figsize=(10,10))
-		sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
-		st.pyplot(fig2)
+	if pbutton == True:
+		st.subheader('Overall Usage of Customers')
+		col1, col2 = st.columns(2)
+		with col1:
+			sns.set_theme(style="whitegrid")
+			fig1 = plt.figure(figsize=(10,10))
+			sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
+			st.pyplot(fig1)
+		with col2:
+			sns.set_theme(style="whitegrid")
+			fig2 = plt.figure(figsize=(10,10))
+			sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
+			st.pyplot(fig2)
 with eda:
-	st.subheader('Data Analysis')
-	barb = bad_f['Hr', 'Usage']
-	st.bar_chart(barb)
+	if pbutton == True:
+		st.subheader('Data Analysis')
+		barb = bad_f['Hr', 'Usage']
+		st.dataframe(barb)
 		
