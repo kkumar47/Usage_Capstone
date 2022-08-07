@@ -11,6 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 import random
 from tensorflow.keras.optimizers import SGD, Adam
+from keras.models import Sequential
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense, Dropout, Activation, Flatten,  BatchNormalization, Conv1D,MaxPooling1D
 
