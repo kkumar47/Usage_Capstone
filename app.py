@@ -246,7 +246,7 @@ with dmodel:
 	N_lable =2 # Total number of classes
 	col13, col14 = st.columns(2)
 	lrt = col13.slider('Select Learning Rate', min_value=0.01, max_value=0.05, value=0.01, step=0.01, help='Select the test data percentage by sliding the slider ')
-	opti = col4.radio('Select Model Optimizer',('SGD','Adam'))
+	opti = col14.radio('Select Model Optimizer',('SGD','Adam'))
 	opt = opti(learning_rate=lrt)
 	model =Sequential()
 	model.add(Conv1D(filters=64,kernel_size=3,strides =1,activation='relu',input_shape=inp_shape))
