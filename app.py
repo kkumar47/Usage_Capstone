@@ -82,6 +82,9 @@ with pprocess:
 			return baddf
 		
 		bad_f =cleanse(baddf)
+		st.text('Processed Bad Customer')
 		st.dataframe(bad_f)
+		st.text('Processed Good Customer')
+		st.dataframe(gooddf)
 	else:
 		st.write('Click Start Process to continue')
