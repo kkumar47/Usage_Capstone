@@ -22,6 +22,7 @@ pprocess = st.container()
 ousage = st.container()
 eda = st.container()
 ddis = st.container()
+dprep = st.container()
 
 with header:
 	font="sans serif"
@@ -181,15 +182,22 @@ with ddis:
 		st.subheader('Usage Data Distribution')
 		col7, col8 = st.columns(2)
 		with col7:
-			st.text('Usge Distribution Bad Customer')
+			st.text('Usage Distribution Bad Customer')
 			fig11 = plt.figure(figsize=(10,10))
 			sns.histplot(data=bad_f, x=bad_f['Usage'],binwidth=5, kde=True)
 			st.pyplot(fig11)
 		with col8:
-			st.text('Usge Distribution Good Customer')
+			st.text('Usage Distribution Good Customer')
 			fig12 = plt.figure(figsize=(10,10))
 			sns.histplot(data=gooddf, x=gooddf['Usage'], binwidth=5,kde=True)
 			st.pyplot(fig12)
 		
-		
+with dprep:
+	if pbutton == True:
+		GR_Con = gooddf.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
+		BR_Con = bad_f.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
+		st.text('Pivoted Data')
+		col9, col10 = st.columns(2)
+		col9.write(BR_Con)
+		col10.write(GR_Con)
 
