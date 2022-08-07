@@ -10,6 +10,7 @@ from io import StringIO
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 import random
+from tensorflow.keras.optimizers import SGD, Adam
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense, Dropout, Activation, Flatten,  BatchNormalization, Conv1D,MaxPooling1D
 
@@ -25,6 +26,7 @@ eda = st.container()
 ddis = st.container()
 dprep = st.container()
 ttsplit = st.container()
+dmodel = st.container()
 
 with header:
 	font="sans serif"
@@ -238,3 +240,23 @@ with ttsplit:
 	col12.write('Shape of Training Label post split')	
 	col12.write(y_train.shape)
 
+with dmodel:
+	st.subheader('Define Convolution Model Parameters')
+	inp_shape= X_train.shape[1:]
+	N_lable =2 # Total number of classes
+	col13, col14 = st.columns(2)
+	lrt = col13.slider('Select Learning Rate', min_value=0.01, max_value=0.05, value=0.01, step=0.01, help='Select the test data percentage by sliding the slider ')
+	opti = col4.radio('Select Model Optimizer',('SGD','Adam'))
+	opt = opti(learning_rate=lrt)
+	model =Sequential()
+	model.add(Conv1D(filters=64,kernel_size=3,strides =1,activation='relu',input_shape=inp_shape))
+	model.add(Conv1D(filters=32,kernel_size=3,activation='relu'))
+	model.add(BatchNormalization())
+	model.add(MaxPooling1D())
+	model.add(Dense(100, activation='sigmoid'))
+	model.add(Flatten())
+	model.add(Dropout(0.2))
+	model.add(Dense(N_lable, activation="softmax"))
+	model.compile(loss="mae",optimizer=opt,metrics=['accuracy'])
+	model.summary()
+	
