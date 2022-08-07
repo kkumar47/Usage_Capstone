@@ -131,15 +131,17 @@ with eda:
 			st.pyplot(fig4)
 	elif datav =='Weekdays':
 		with col5:
-			sns.set_theme(style="whitegrid")
-			fig5 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
-			st.pyplot(fig5)
+			#sns.set_theme(style="whitegrid")
+			#fig5 = plt.figure(figsize=(10,10))
+			#sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
+			#st.pyplot(fig5)
+			st.text('Seasonal Plot')
 		with col6:
-			sns.set_theme(style="whitegrid")
-			fig6 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
-			st.pyplot(fig6)
+			#sns.set_theme(style="whitegrid")
+			#fig6 = plt.figure(figsize=(10,10))
+			#sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
+			#st.pyplot(fig6)
+			st.text('Seasonal Plot')
 		
 		
 		
