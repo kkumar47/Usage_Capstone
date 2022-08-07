@@ -248,7 +248,10 @@ with dmodel:
 	col13, col14 = st.columns(2)
 	lrt = col13.slider('Select Learning Rate', min_value=0.01, max_value=0.05, value=0.01, step=0.01, help='Select the test data percentage by sliding the slider ')
 	opti = col14.radio('Select Model Optimizer',('SGD','Adam'))
-	#opt = opti(learning_rate=lrt)
+	if opti == 'SGD':
+		opt=SGD(learning_rate=lrt)
+	elif opti =='Adam':
+		opt=Adam(learning_rate=lrt)
 	model =Sequential()
 	model.add(Conv1D(filters=64,kernel_size=3,strides =1,activation='relu',input_shape=inp_shape))
 	model.add(Conv1D(filters=32,kernel_size=3,activation='relu'))
@@ -258,6 +261,6 @@ with dmodel:
 	model.add(Flatten())
 	model.add(Dropout(0.2))
 	model.add(Dense(N_lable, activation="softmax"))
-	model.compile(loss="mae",optimizer=opti,metrics=['accuracy'])
-	st.write(model.summary())
+	model.compile(loss="mae",optimizer=opt,metrics=['accuracy'])
+	model.summary()
 	
