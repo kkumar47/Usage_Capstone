@@ -177,18 +177,19 @@ with eda:
 			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Residential Annual Usage')
 			st.pyplot(fig10)
 with ddis:
-	st.subheader('Usage Data Distribution')
-	col7, col8 = st.columns(2)
-	with col7:
-		st.text('Usge Distribution Bad Customer')
-		fig11 = plt.figure(figsize=(10,10))
-		sns.histplot(data=bad_f, x=bad_f['Usage'], kde=True)
-		st.pyplot(fig11)
-	with col8:
-		st.text('Usge Distribution Good Customer')
-		fig12 = plt.figure(figsize=(10,10))
-		sns.histplot(data=gooddf, x=gooddf['Usage'], kde=True)
-		st.pyplot(fig12)
+	if pbutton == True:
+		st.subheader('Usage Data Distribution')
+		col7, col8 = st.columns(2)
+		with col7:
+			st.text('Usge Distribution Bad Customer')
+			fig11 = plt.figure(figsize=(10,10))
+			sns.histplot(data=bad_f, x=bad_f['Usage'],binwidth=5, kde=True)
+			st.pyplot(fig11)
+		with col8:
+			st.text('Usge Distribution Good Customer')
+			fig12 = plt.figure(figsize=(10,10))
+			sns.histplot(data=gooddf, x=gooddf['Usage'], binwidth=5,kde=True)
+			st.pyplot(fig12)
 		
 		
 
