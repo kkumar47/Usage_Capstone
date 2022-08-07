@@ -259,5 +259,5 @@ with dmodel:
 	model.add(Dropout(0.2))
 	model.add(Dense(N_lable, activation="softmax"))
 	model.compile(loss="mae",optimizer=opti,metrics=['accuracy'])
-	model.summary()
+	st.write(model.summary())
 	
