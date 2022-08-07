@@ -268,7 +268,7 @@ with dmodel:
 with tmodel:
 	
 	epch =st.slider('Select Epochs', min_value=10, max_value=1000, value=10, step=10, help='Select the training epoch size')
-	Model_final = model.fit(X_train, y_train, batch_size=20,epoch=epch, verbose=0)
+	Model_final = model.fit(X_train, y_train, batch_size=20,epochs=epch, verbose=0)
 	fig13 = plt.figure(figsize=(10,10))
 	plt.plot(Model_final.history["accuracy"])
 	plt.xlabel("Epoch #")
