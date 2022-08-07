@@ -20,6 +20,7 @@ cred = st.container()
 rawdata = st.container()
 pprocess = st.container()
 ousage = st.container()
+eda = st.container()
 
 with header:
 	font="sans serif"
@@ -111,4 +112,7 @@ with ousage:
 		fig2 = plt.figure(figsize=(10,10))
 		sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
 		st.pyplot(fig2)
+with eda:
+	st.subheader('Data Analysis')
+	st.barchart(bad_f['Hr'],bad_f['Usage'])
 		
