@@ -163,6 +163,16 @@ with eda:
 			fig8 = plt.figure(figsize=(10,10))
 			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Residential Monthly Usage')
 			st.pyplot(fig8)
-		
-		
-		
+		with col5:
+			st.text('Annual Usage Plot Bad Customer')
+			sns.set_theme(style="whitegrid")
+			fig9 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Residential Annual Usage')
+			st.pyplot(fig9)
+		with col6:
+			st.text('Annual Usage Plot Good Customer')
+			sns.set_theme(style="whitegrid")
+			fig10 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Residential Annual Usage')
+			st.pyplot(fig10)
+
