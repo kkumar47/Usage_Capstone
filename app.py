@@ -116,6 +116,6 @@ with ousage:
 with eda:
 	if pbutton == True:
 		st.subheader('Data Analysis')
-		barb = bad_f[['Hr', 'Usage']]
+		barb = bad_f[['Season', 'Usage']]
 		st.bar_chart(barb)
 		
