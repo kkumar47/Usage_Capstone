@@ -58,7 +58,7 @@ with rawdata:
 	
 with pprocess:
 	st.subheader("Preprocess Dataset")
-	pbutton = st.button('Start Process')
+	pbutton = st.button('Start Process', help='Click to generate additional fields')
 	if pbutton == True:
 		st.write('Processing Data please wait....')
 		@st.cache
@@ -84,7 +84,11 @@ with pprocess:
 		bad_f =cleanse(baddf)
 		st.text('Processed Bad Customer')
 		st.dataframe(bad_f)
+		bad_fd = bad_f.to_csv().encode('utf-8')
+		st.download_button('Download Data', data=bad_fd, file_name='Bad Customer Data.csv', help='Download Data in CSV format')
 		st.text('Processed Good Customer')
 		st.dataframe(gooddf)
+		good_dfd = gooddf.to_csv().encode('utf-8')
+		st.download_button('Download Data', data=good_dfd, file_name='Good Customer Data.csv', help='Download Data in CSV format')
 	else:
 		st.write('Click Start Process to continue')
