@@ -116,6 +116,6 @@ with ousage:
 with eda:
 	if pbutton == True:
 		st.subheader('Data Analysis')
-		barb = bad_f[['Season', 'Usage']]
-		st.dataframe(barb)
+		barb = bad_f[['Usage', 'Season']]
+		st.line_chart(barb)
 		
