@@ -28,6 +28,7 @@ ddis = st.container()
 dprep = st.container()
 ttsplit = st.container()
 dmodel = st.container()
+tmodel = st.container()
 
 with header:
 	font="sans serif"
@@ -242,7 +243,7 @@ with ttsplit:
 	col12.write(y_train.shape)
 
 with dmodel:
-	st.subheader('Define Convolution Model Parameters')
+	st.subheader('Define Convolution Model Hyper Parameters')
 	inp_shape= X_train.shape[1:]
 	N_lable =2 # Total number of classes
 	col13, col14 = st.columns(2)
@@ -264,3 +265,13 @@ with dmodel:
 	model.compile(loss="mae",optimizer=opt,metrics=['accuracy'])
 	model.summary()
 	
+with tmodel:
+	
+	epch =st.slider('Select Epochs', min_value=10, max_value=1000, value=10, step=10, help='Select the training epoch size')
+	Model_final = model.fit(X_train, y_train, batch_size=20,epoch=epch, verbose=0)
+	fig13 = plt.figure(figsize=(10,10))
+	plt.plot(Model_final.history["accuracy"])
+	plt.xlabel("Epoch #")
+	plt.ylabel("Accuracy")
+	plt.title("Training Accuracy")
+	st.pyplot(fig13)
