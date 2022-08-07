@@ -114,5 +114,5 @@ with ousage:
 		st.pyplot(fig2)
 with eda:
 	st.subheader('Data Analysis')
-	st.barchart(bad_f['Hr'],bad_f['Usage'])
+	st.bar_chart(bad_f['Hr'],bad_f['Usage'])
 		
