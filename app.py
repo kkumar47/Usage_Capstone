@@ -117,5 +117,5 @@ with eda:
 	if pbutton == True:
 		st.subheader('Data Analysis')
 		barb = bad_f[['Hr', 'Usage']]
-		st.dataframe(barb)
+		st.bar_chart(barb)
 		
