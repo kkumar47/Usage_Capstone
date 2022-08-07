@@ -18,6 +18,7 @@ from tensorflow.keras.layers import Input, Dense, Dropout, Activation, Flatten, 
 header = st.container()
 cred = st.container()
 rawdata = st.container()
+pprocess = st.container()
 
 with header:
 	font="sans serif"
@@ -54,3 +55,11 @@ with rawdata:
 	st.dataframe(rawdf.head(10))
 	rawd = rawdf.to_csv().encode('utf-8')
 	st.download_button('Download Data', data=rawd, file_name='Raw Data.csv', help='Download Data in CSV format')
+	
+with pprocess:
+	st.subheader("Preprocess Dataset")
+	pbutton = st.button('Start Process')
+	if pbutton == True:
+		st.write('Processing Data please wait....')
+	else:
+		st.write('Click Start Process to continue')
