@@ -8,6 +8,7 @@ import requests
 import calendar
 from io import StringIO
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
 import random
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense, Dropout, Activation, Flatten,  BatchNormalization, Conv1D,MaxPooling1D
@@ -194,10 +195,26 @@ with ddis:
 		
 with dprep:
 	if pbutton == True:
+		st.subheader('Data Preparation')
 		GR_Con = gooddf.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
 		BR_Con = bad_f.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
 		st.text('Pivoted Data')
 		col9, col10 = st.columns(2)
 		col9.write(BR_Con)
 		col10.write(GR_Con)
+		# Start getting the input format
+		x=[]
+		n=1 # Class for Good Customer
+		for i in gooddf['Meter'].unique():
+  			y=GR_Con.loc[i,:].transpose().to_numpy()
+  			x.append([y,n])
+		w=[]
+		t=0 # Class for Bad Customer
+		for j in bad_f['Meter'].unique():
+			z=BR_Con.loc[j,:].transpose().to_numpy()
+			w.append([z,t])
+		col9.write(w[0])
+		col10.write(x[0])
+			
+		
 
