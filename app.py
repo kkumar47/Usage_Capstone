@@ -19,6 +19,7 @@ header = st.container()
 cred = st.container()
 rawdata = st.container()
 pprocess = st.container()
+ousage = st.container()
 
 with header:
 	font="sans serif"
@@ -96,3 +97,18 @@ with pprocess:
 		st.download_button('Download Data', data=good_dfd, file_name='Good Customer Data.csv', help='Download Data in CSV format')
 	else:
 		st.write('Click Start Process to continue')
+		
+with ousage:
+	st.subheader('Overall Usage of Customers')
+	col1, col2 = st.columns(2)
+	with col1:
+		sns.set_theme(style="whitegrid")
+		fig1 = plt.figure(figsize=(10,10))
+		sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
+		st.pyplot(fig1)
+	with col2:
+		sns.set_theme(style="whitegrid")
+		fig2 = plt.figure(figsize=(10,10))
+		sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
+		st.pyplot(fig2)
+		
