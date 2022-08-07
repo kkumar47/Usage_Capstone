@@ -114,6 +114,10 @@ with ousage:
 			fig2 = plt.figure(figsize=(10,10))
 			sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
 			st.pyplot(fig2)
+			
+@st.cache
+gooddf
+bad_f
 with eda:
 	st.subheader('Data Analysis')
 	datav = st.selectbox('At what level Do you want the Usage report?',('Season','Weekdays','Month','Year', 'Hourly'), help='Select Visualization')
