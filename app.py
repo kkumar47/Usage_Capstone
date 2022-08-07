@@ -294,5 +294,5 @@ with emodel:
 	ax.set_ylabel('Actual Class')
 	st.pyplot(fig14)
 	
-	st.pyplot(fig14)
+	
 	
