@@ -120,9 +120,10 @@ with ousage:
 with eda:
 	if pbutton == True:
 		st.subheader('Data Analysis')
-		st.text('Note: While selecting the visualization type please click Start Process again else, the visualization fails to load')
+		
 		
 		col5, col6=st.columns(2)
+		st.subheader('Seasonal Usage Plot')
 		with col5:
 			sns.set_theme(style="whitegrid")
 			fig3 = plt.figure(figsize=(10,10))
@@ -133,6 +134,7 @@ with eda:
 			fig4 = plt.figure(figsize=(10,10))
 			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
 			st.pyplot(fig4)
+		st.subheader('Daily Usage Plot')
 		with col5:
 			sns.set_theme(style="whitegrid")
 			fig5 = plt.figure(figsize=(10,10))
