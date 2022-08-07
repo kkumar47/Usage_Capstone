@@ -123,25 +123,29 @@ with eda:
 		
 		
 		col5, col6=st.columns(2)
-		st.subheader('Seasonal Usage Plot')
+		
 		with col5:
+			st.text('Seasonal Usage Plot')
 			sns.set_theme(style="whitegrid")
 			fig3 = plt.figure(figsize=(10,10))
 			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Customer Seasonal Usage')
 			st.pyplot(fig3)
 		with col6:
+			st.text('                      ')
 			sns.set_theme(style="whitegrid")
 			fig4 = plt.figure(figsize=(10,10))
 			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
 			st.pyplot(fig4)
-		st.subheader('Daily Usage Plot')
+		
 		with col5:
+			st.text('Daily Usage Plot')
 			sns.set_theme(style="whitegrid")
 			fig5 = plt.figure(figsize=(10,10))
 			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
 			st.pyplot(fig5)
 			#st.text('Seasonal Plot')
 		with col6:
+			st.text('                      ')
 			sns.set_theme(style="whitegrid")
 			fig6 = plt.figure(figsize=(10,10))
 			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
