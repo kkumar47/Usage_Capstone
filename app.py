@@ -61,5 +61,27 @@ with pprocess:
 	pbutton = st.button('Start Process')
 	if pbutton == True:
 		st.write('Processing Data please wait....')
+		@st.cache
+		def cleanse(baddf):
+			baddf['Date'] = baddf['Day'].apply(lambda x: pd.to_datetime((2009*1000 )+ x, format = "%Y%j") if x<=365 else pd.to_datetime((2010*1000 )+ (x-365), format = "%Y%j"))
+			baddf['Day_Num'] = baddf['Date'].apply(lambda x: x.weekday())
+			baddf['Dayname'] = baddf['Date'].apply(lambda x: calendar.day_name[x.weekday()])
+			baddf['Holiday_Ind'] = baddf['Day_Num'].apply(lambda x: 0 if x<=4 else 1)
+			baddf['Month'] = baddf['Date'].apply(lambda x: x.strftime("%B"))
+			baddf['Year'] = baddf['Date'].apply(lambda x: x.year)
+			def condition(x):
+  				if (x=='August' or x=='September' or x=='October'):
+    					return "Autumn"
+  				elif (x=='November' or x=='December' or x=='January'):
+    					return "Winter"
+  				elif (x=='February' or x=='March' or x=='April'):
+    					return "Spring"
+  				elif (x=='May' or x=='June' or x=='July'):
+    					return "Summer"
+			baddf['Season']=baddf['Month'].apply(condition)
+			return baddf
+		
+		bad_f =cleanse(baddf)
+		st.dataframe(bad_f)
 	else:
 		st.write('Click Start Process to continue')
