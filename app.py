@@ -98,7 +98,7 @@ with pprocess:
 		st.download_button('Download Data', data=good_dfd, file_name='Good Customer Data.csv', help='Download Data in CSV format')
 	else:
 		st.write('Click Start Process to continue')
-		st.stop()
+		
 		
 with ousage:
 	if pbutton == True:
