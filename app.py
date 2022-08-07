@@ -247,7 +247,7 @@ with dmodel:
 	inp_shape= X_train.shape[1:]
 	N_lable =2 # Total number of classes
 	col13, col14 = st.columns(2)
-	lrt = col13.slider('Select Learning Rate', min_value=0.01, max_value=0.05, value=0.01, step=0.01, help='Select the test data percentage by sliding the slider ')
+	lrt = col13.slider('Select Learning Rate', min_value=0.01, max_value=0.05, value=0.01, step=0.001, help='Select the test data percentage by sliding the slider ')
 	opti = col14.radio('Select Model Optimizer',('SGD','Adam'))
 	if opti == 'SGD':
 		opt=SGD(learning_rate=lrt)
