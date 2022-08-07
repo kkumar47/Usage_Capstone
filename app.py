@@ -64,121 +64,117 @@ with rawdata:
 	
 with pprocess:
 	st.subheader("Preprocess Dataset")
-	pbutton = st.button('Start Process', help='Click to generate additional fields')
-	if pbutton == True:
-		st.write('Processing Data please wait....')
-		@st.cache
-		def cleanse(baddf):
-			baddf['Date'] = baddf['Day'].apply(lambda x: pd.to_datetime((2009*1000 )+ x, format = "%Y%j") if x<=365 else pd.to_datetime((2010*1000 )+ (x-365), format = "%Y%j"))
-			baddf['Day_Num'] = baddf['Date'].apply(lambda x: x.weekday())
-			baddf['Dayname'] = baddf['Date'].apply(lambda x: calendar.day_name[x.weekday()])
-			baddf['Holiday_Ind'] = baddf['Day_Num'].apply(lambda x: 0 if x<=4 else 1)
-			baddf['Month'] = baddf['Date'].apply(lambda x: x.strftime("%B"))
-			baddf['Year'] = baddf['Date'].apply(lambda x: x.year)
-			def condition(x):
-  				if (x=='August' or x=='September' or x=='October'):
-    					return "Autumn"
-  				elif (x=='November' or x=='December' or x=='January'):
-    					return "Winter"
-  				elif (x=='February' or x=='March' or x=='April'):
-    					return "Spring"
-  				elif (x=='May' or x=='June' or x=='July'):
-    					return "Summer"
-			baddf['Season']=baddf['Month'].apply(condition)
-			baddf.drop(baddf[baddf['Hr']==24].index, inplace=True)
-			baddf.dropna(axis=0,inplace=True)
-			return baddf
+	st.write('Processing Data please wait....')
+	@st.cache
+	def cleanse(baddf):
+		baddf['Date'] = baddf['Day'].apply(lambda x: pd.to_datetime((2009*1000 )+ x, format = "%Y%j") if x<=365 else pd.to_datetime((2010*1000 )+ (x-365), format = "%Y%j"))
+		baddf['Day_Num'] = baddf['Date'].apply(lambda x: x.weekday())
+		baddf['Dayname'] = baddf['Date'].apply(lambda x: calendar.day_name[x.weekday()])
+		baddf['Holiday_Ind'] = baddf['Day_Num'].apply(lambda x: 0 if x<=4 else 1)
+		baddf['Month'] = baddf['Date'].apply(lambda x: x.strftime("%B"))
+		baddf['Year'] = baddf['Date'].apply(lambda x: x.year)
+		def condition(x):
+  			if (x=='August' or x=='September' or x=='October'):
+    				return "Autumn"
+  			elif (x=='November' or x=='December' or x=='January'):
+    				return "Winter"
+  			elif (x=='February' or x=='March' or x=='April'):
+    				return "Spring"
+  			elif (x=='May' or x=='June' or x=='July'):
+    				return "Summer"
+		baddf['Season']=baddf['Month'].apply(condition)
+		baddf.drop(baddf[baddf['Hr']==24].index, inplace=True)
+		baddf.dropna(axis=0,inplace=True)
+		return baddf
 		
-		bad_f =cleanse(baddf)
-		st.text('Processed Bad Customer')
-		st.dataframe(bad_f)
-		bad_fd = bad_f.to_csv().encode('utf-8')
-		st.download_button('Download Data', data=bad_fd, file_name='Bad Customer Data.csv', help='Download Data in CSV format')
-		st.text('Processed Good Customer')
-		gooddf.drop(gooddf[gooddf['Hr']==24].index, inplace=True)
-		gooddf.dropna(axis=0,inplace=True)
-		st.dataframe(gooddf)
-		good_dfd = gooddf.to_csv().encode('utf-8')
-		st.download_button('Download Data', data=good_dfd, file_name='Good Customer Data.csv', help='Download Data in CSV format')
-	else:
-		st.write('Click Start Process to continue')
+	bad_f =cleanse(baddf)
+	st.text('Processed Bad Customer')
+	st.dataframe(bad_f)
+	bad_fd = bad_f.to_csv().encode('utf-8')
+	st.download_button('Download Data', data=bad_fd, file_name='Bad Customer Data.csv', help='Download Data in CSV format')
+	st.text('Processed Good Customer')
+	gooddf.drop(gooddf[gooddf['Hr']==24].index, inplace=True)
+	gooddf.dropna(axis=0,inplace=True)
+	st.dataframe(gooddf)
+	good_dfd = gooddf.to_csv().encode('utf-8')
+	st.download_button('Download Data', data=good_dfd, file_name='Good Customer Data.csv', help='Download Data in CSV format')
+
 		
 		
 with ousage:
-	if pbutton == True:
-		st.subheader('Overall Usage of Customers')
-		col1, col2 = st.columns(2)
-		with col1:
-			sns.set_theme(style="whitegrid")
-			fig1 = plt.figure(figsize=(10,10))
-			sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
-			st.pyplot(fig1)
-		with col2:
-			sns.set_theme(style="whitegrid")
-			fig2 = plt.figure(figsize=(10,10))
-			sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
-			st.pyplot(fig2)
+	st.subheader('Overall Usage of Customers')
+	col1, col2 = st.columns(2)
+	with col1:
+		sns.set_theme(style="whitegrid")
+		fig1 = plt.figure(figsize=(10,10))
+		sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
+		st.pyplot(fig1)
+	with col2:
+		sns.set_theme(style="whitegrid")
+		fig2 = plt.figure(figsize=(10,10))
+		sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
+		st.pyplot(fig2)
 			
 
 
 with eda:
-	if pbutton == True:
-		st.subheader('Data Visuals')
+	
+	st.subheader('Data Visuals')
 		
 		
-		col5, col6=st.columns(2)
+	col5, col6=st.columns(2)
 		
-		with col5:
-			st.text('Seasonal Usage Bad Plot')
-			sns.set_theme(style="whitegrid")
-			fig3 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Customer Seasonal Usage')
-			st.pyplot(fig3)
-		with col6:
-			st.text('Seasonal Usage Good Plot')
-			sns.set_theme(style="whitegrid")
-			fig4 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
-			st.pyplot(fig4)
+	with col5:
+		st.text('Seasonal Usage Bad Plot')
+		sns.set_theme(style="whitegrid")
+		fig3 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Customer Seasonal Usage')
+		st.pyplot(fig3)
+	with col6:
+		st.text('Seasonal Usage Good Plot')
+		sns.set_theme(style="whitegrid")
+		fig4 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
+		st.pyplot(fig4)
 		
-		with col5:
-			st.text('Daily Usage Plot Bad Customer')
-			sns.set_theme(style="whitegrid")
-			fig5 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
-			st.pyplot(fig5)
-			#st.text('Seasonal Plot')
-		with col6:
-			st.text('Daily Usage Plot Good Customer ')
-			sns.set_theme(style="whitegrid")
-			fig6 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
-			st.pyplot(fig6)
-			#st.text('Seasonal Plot')
-		with col5:
-			st.text('Monthly Usage Plot Bad Customer')
-			sns.set_theme(style="whitegrid")
-			fig7 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Month']).set(title='Bad Residential Monthly Usage')
-			st.pyplot(fig7)
-		with col6:
-			st.text('Monthly Usage Plot Good Customer')
-			sns.set_theme(style="whitegrid")
-			fig8 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Residential Monthly Usage')
-			st.pyplot(fig8)
-		with col5:
-			st.text('Annual Usage Plot Bad Customer')
-			sns.set_theme(style="whitegrid")
-			fig9 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Residential Annual Usage')
-			st.pyplot(fig9)
-		with col6:
-			st.text('Annual Usage Plot Good Customer')
-			sns.set_theme(style="whitegrid")
-			fig10 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Residential Annual Usage')
-			st.pyplot(fig10)
+	with col5:
+		st.text('Daily Usage Plot Bad Customer')
+		sns.set_theme(style="whitegrid")
+		fig5 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
+		st.pyplot(fig5)
+		#st.text('Seasonal Plot')
+	with col6:
+		st.text('Daily Usage Plot Good Customer ')
+		sns.set_theme(style="whitegrid")
+		fig6 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
+		st.pyplot(fig6)
+		#st.text('Seasonal Plot')
+	with col5:
+		st.text('Monthly Usage Plot Bad Customer')
+		sns.set_theme(style="whitegrid")
+		fig7 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Month']).set(title='Bad Residential Monthly Usage')
+		st.pyplot(fig7)
+	with col6:
+		st.text('Monthly Usage Plot Good Customer')
+		sns.set_theme(style="whitegrid")
+		fig8 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Residential Monthly Usage')
+		st.pyplot(fig8)
+	with col5:
+		st.text('Annual Usage Plot Bad Customer')
+		sns.set_theme(style="whitegrid")
+		fig9 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Residential Annual Usage')
+		st.pyplot(fig9)
+	with col6:
+		st.text('Annual Usage Plot Good Customer')
+		sns.set_theme(style="whitegrid")
+		fig10 = plt.figure(figsize=(10,10))
+		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Residential Annual Usage')
+		st.pyplot(fig10)
 with ddis:
 	if pbutton == True:
 		st.subheader('Usage Data Distribution')
@@ -195,45 +191,45 @@ with ddis:
 			st.pyplot(fig12)
 		
 with dprep:
-	if pbutton == True:
-		st.subheader('Data Preparation')
-		GR_Con = gooddf.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
-		BR_Con = bad_f.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
-		st.text('Pivoted Data')
-		col9, col10 = st.columns(2)
-		col9.write(BR_Con)
-		col10.write(GR_Con)
-		# Start getting the input format
-		x=[]
-		n=1 # Class for Good Customer
-		for i in gooddf['Meter'].unique():
-  			y=GR_Con.loc[i,:].transpose().to_numpy()
-  			x.append([y,n])
-		w=[]
-		t=0 # Class for Bad Customer
-		for j in bad_f['Meter'].unique():
-			z=BR_Con.loc[j,:].transpose().to_numpy()
-			w.append([z,t])
-		st.text('Final Input data for Model')
-		col9.write(w[0])
-		col10.write(x[0])
+	
+	st.subheader('Data Preparation')
+	GR_Con = gooddf.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
+	BR_Con = bad_f.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
+	st.text('Pivoted Data')
+	col9, col10 = st.columns(2)
+	col9.write(BR_Con)
+	col10.write(GR_Con)
+	# Start getting the input format
+	x=[]
+	n=1 # Class for Good Customer
+	for i in gooddf['Meter'].unique():
+  		y=GR_Con.loc[i,:].transpose().to_numpy()
+  		x.append([y,n])
+	w=[]
+	t=0 # Class for Bad Customer
+	for j in bad_f['Meter'].unique():
+		z=BR_Con.loc[j,:].transpose().to_numpy()
+		w.append([z,t])
+	st.text('Final Input data for Model')
+	col9.write(w[0])
+	col10.write(x[0])
 			
 with ttsplit:
-	if pbutton == True:
-		st.subheader('Train-Test Split')
-		col11, col12 = st.columns(2)
-		test = col11.slider('Select testing data (in %)', min_value=0.1, max_value=0.5, value=0.1, step=0.1, help='Select the test data percentage by sliding the slider ')
-		train= col12.metric(label ='Train data (in %): ', value=1-test)
-		def SplitFeaturesAndLabels(data):
-    			X = []
-    			y = []
-    			for features, labels in data: #Label are the Categories available in the data array
-        			X.append(features)
-        			y.append(labels)
-    			X = np.array(X) #Features Vector
-    			y = np.array(y) #Label Vector
-    			return X, y
+	
+	st.subheader('Train-Test Split')
+	col11, col12 = st.columns(2)
+	test = col11.slider('Select testing data (in %)', min_value=0.1, max_value=0.5, value=0.1, step=0.1, help='Select the test data percentage by sliding the slider ')
+	train= col12.metric(label ='Train data (in %): ', value=1-test)
+	def SplitFeaturesAndLabels(data):
+    		X = []
+    		y = []
+    		for features, labels in data: #Label are the Categories available in the data array
+        		X.append(features)
+        		y.append(labels)
+    		X = np.array(X) #Features Vector
+    		y = np.array(y) #Label Vector
+    		return X, y
 		#X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=test, random_state=42)
-		st.write(test)
+	st.write(test)
 		
 
