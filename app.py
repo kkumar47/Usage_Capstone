@@ -98,6 +98,7 @@ with pprocess:
 		st.download_button('Download Data', data=good_dfd, file_name='Good Customer Data.csv', help='Download Data in CSV format')
 	else:
 		st.write('Click Start Process to continue')
+		st.stop()
 		
 with ousage:
 	if pbutton == True:
@@ -106,16 +107,28 @@ with ousage:
 		with col1:
 			sns.set_theme(style="whitegrid")
 			fig1 = plt.figure(figsize=(10,10))
-			sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
+			sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
 			st.pyplot(fig1)
 		with col2:
 			sns.set_theme(style="whitegrid")
 			fig2 = plt.figure(figsize=(10,10))
-			sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
+			sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
 			st.pyplot(fig2)
 with eda:
-	if pbutton == True:
-		st.subheader('Data Analysis')
-		barb = bad_f[['Usage', 'Season']]
-		st.line_chart(barb)
+	st.subheader('Data Analysis')
+	datav = st.selectbox('At what level Do you want the Usage report?',('Season','Weekdays','Month','Year', 'Hourly'), index=0, help='Select Visualization')
+	col5, col6=st.columns(2)
+	if datav == 'Season':
+		with col5:
+			sns.set_theme(style="whitegrid")
+			fig3 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Residential Seasonal Usage')
+			st.pyplot(fig3)
+		with col6:
+			sns.set_theme(style="whitegrid")
+			fig4 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Residential Seasonal Usage')
+			st.pyplot(fig4)
+		
+		
 		
