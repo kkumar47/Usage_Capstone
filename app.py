@@ -234,6 +234,6 @@ with ttsplit:
 	X, y = SplitFeaturesAndLabels(Usage_list)
 	X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=test, random_state=42)
 	
-	st.write(test)
+	st.write(X_train.shape)
 		
 
