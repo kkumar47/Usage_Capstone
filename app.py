@@ -29,6 +29,7 @@ dprep = st.container()
 ttsplit = st.container()
 dmodel = st.container()
 tmodel = st.container()
+emodel = st.container()
 
 with header:
 	font="sans serif"
@@ -266,7 +267,7 @@ with dmodel:
 	model.summary()
 	
 with tmodel:
-	
+	st.subheader('Model Training')
 	epch =st.slider('Select Epochs', min_value=10, max_value=1000, value=10, step=10, help='Select the training epoch size')
 	Model_final = model.fit(X_train, y_train, batch_size=20,epochs=epch, verbose=0)
 	fig13 = plt.figure(figsize=(10,10))
@@ -275,3 +276,22 @@ with tmodel:
 	plt.ylabel("Accuracy")
 	plt.title("Training Accuracy")
 	st.pyplot(fig13)
+
+with emodel:
+	st.subheader('Model Evaluation')
+	Actual_Test =[]
+	Pred_Test =[]
+	Pred = model.predict(X_test)
+	for i in range(len(X_test)):
+  		Actual_Test.append(y_test[i])
+  		Pred_Test.append(np.argmax(Pred[i]))
+	result =confusion_matrix(Actual_Test,Pred_Test)
+	
+	fig14,ax = plt.subplots(figsize=(10,10))
+	sns.heatmap(result, annot=True, ax=ax)
+	ax.set_xlabel('Predicted Class')
+	ax.set_ylabel('Actual Class')
+	st.pyplot(fig14)
+	
+	st.pyplot(fig14)
+	
