@@ -115,10 +115,11 @@ with ousage:
 			sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
 			st.pyplot(fig2)
 			
-@st.cache
+
 
 with eda:
 	st.subheader('Data Analysis')
+	st.text('Next: While selecting the visualization type please click Start Process again')
 	datav = st.selectbox('At what level Do you want the Usage report?',('Season','Weekdays','Month','Year', 'Hourly'), help='Select Visualization')
 	col5, col6=st.columns(2)
 	if datav == 'Season':
