@@ -24,6 +24,7 @@ ousage = st.container()
 eda = st.container()
 ddis = st.container()
 dprep = st.container()
+ttsplit = st.container()
 
 with header:
 	font="sans serif"
@@ -213,8 +214,25 @@ with dprep:
 		for j in bad_f['Meter'].unique():
 			z=BR_Con.loc[j,:].transpose().to_numpy()
 			w.append([z,t])
+		st.text('Final Input data for Model')
 		col9.write(w[0])
 		col10.write(x[0])
 			
+with ttsplit:
+	if pbutton == True:
+		st.subheader('Train-Test Split')
+		col11, col12 = st.columns(2)
+		test = col11.slider('Select testing data (in %)', min_value=0.1, max_value=0.5, value=0.1, step=0.1, help='Select the test data percentage by sliding the slider ')
+		train= col12.metric(label ='Train data (in %): ', value=1-test)
+		def SplitFeaturesAndLabels(data):
+    			X = []
+    			y = []
+    			for features, labels in data: #Label are the Categories available in the data array
+        			X.append(features)
+        			y.append(labels)
+    			X = np.array(X) #Features Vector
+    			y = np.array(y) #Label Vector
+    			return X, y
+		X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=test, random_state=42)
 		
 
