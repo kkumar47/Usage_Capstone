@@ -6,3 +6,4 @@ numpy
 datetime
 sklearn
 tensorflow
+keras
