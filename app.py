@@ -79,6 +79,8 @@ with pprocess:
   				elif (x=='May' or x=='June' or x=='July'):
     					return "Summer"
 			baddf['Season']=baddf['Month'].apply(condition)
+			baddf.drop(baddf[baddf['Hr']==24].index, inplace=True)
+			baddf.dropna(axis=0,inplace=True)
 			return baddf
 		
 		bad_f =cleanse(baddf)
@@ -87,6 +89,8 @@ with pprocess:
 		bad_fd = bad_f.to_csv().encode('utf-8')
 		st.download_button('Download Data', data=bad_fd, file_name='Bad Customer Data.csv', help='Download Data in CSV format')
 		st.text('Processed Good Customer')
+		gooddf.drop(gooddf[gooddf['Hr']==24].index, inplace=True)
+		gooddf.dropna(axis=0,inplace=True)
 		st.dataframe(gooddf)
 		good_dfd = gooddf.to_csv().encode('utf-8')
 		st.download_button('Download Data', data=good_dfd, file_name='Good Customer Data.csv', help='Download Data in CSV format')
