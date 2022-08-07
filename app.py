@@ -234,7 +234,7 @@ with ttsplit:
 	X, y = SplitFeaturesAndLabels(Usage_list)
 	X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=test, random_state=42)
 	col11.write('Shape of Training data post data split')
-	col11.metric(X_train.shape)
+	col11.write(X_train.shape)
 	col12.write('Shape of Training Label post split')	
-	col12.matric(y_train.shape)
+	col12.write(y_train.shape)
 
