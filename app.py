@@ -213,6 +213,7 @@ with dprep:
 	st.text('Final Input data for Model')
 	col9.write(w[0])
 	col10.write(x[0])
+	Usage_list = x+w
 			
 with ttsplit:
 	
@@ -229,7 +230,10 @@ with ttsplit:
     		X = np.array(X) #Features Vector
     		y = np.array(y) #Label Vector
     		return X, y
+	
+	X, y = SplitFeaturesAndLabels(Usage_list)
 	X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=test, random_state=42)
+	
 	st.write(test)
 		
 
