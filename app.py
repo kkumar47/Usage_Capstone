@@ -119,7 +119,7 @@ with ousage:
 
 with eda:
 	if pbutton == True:
-		st.subheader('Data Analysis')
+		st.subheader('Data Visuals')
 		
 		
 		col5, col6=st.columns(2)
@@ -151,6 +151,18 @@ with eda:
 			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
 			st.pyplot(fig6)
 			#st.text('Seasonal Plot')
+		with col5:
+			st.text('Monthly Usage Plot Bad Customer')
+			sns.set_theme(style="whitegrid")
+			fig7 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Month']).set(title='Bad Residential Monthly Usage')
+			st.pyplot(fig7)
+		with col6:
+			st.text('Monthly Usage Plot Good Customer')
+			sns.set_theme(style="whitegrid")
+			fig8 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Residential Monthly Usage')
+			st.pyplot(fig8)
 		
 		
 		
