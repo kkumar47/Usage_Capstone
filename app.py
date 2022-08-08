@@ -126,61 +126,62 @@ with ousage:
 with eda:
 	
 	st.subheader('Data Visuals')
-		
-		
+	datav = st.selectbox('At what level Do you want the Usage report?',('Season','Weekdays','Month','Year', 'Hourly'), index=0, help='Select Visualization')	
 	col5, col6=st.columns(2)
-		
-	with col5:
-		st.text('Seasonal Usage Bad Plot')
-		sns.set_theme(style="whitegrid")
-		fig3 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Customer Seasonal Usage')
-		st.pyplot(fig3)
-	with col6:
-		st.text('Seasonal Usage Good Plot')
-		sns.set_theme(style="whitegrid")
-		fig4 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
-		st.pyplot(fig4)
-		
-	with col5:
-		st.text('Daily Usage Plot Bad Customer')
-		sns.set_theme(style="whitegrid")
-		fig5 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
-		st.pyplot(fig5)
-		#st.text('Seasonal Plot')
-	with col6:
-		st.text('Daily Usage Plot Good Customer ')
-		sns.set_theme(style="whitegrid")
-		fig6 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
-		st.pyplot(fig6)
-		#st.text('Seasonal Plot')
-	with col5:
-		st.text('Monthly Usage Plot Bad Customer')
-		sns.set_theme(style="whitegrid")
-		fig7 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Month']).set(title='Bad Residential Monthly Usage')
-		st.pyplot(fig7)
-	with col6:
-		st.text('Monthly Usage Plot Good Customer')
-		sns.set_theme(style="whitegrid")
-		fig8 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Residential Monthly Usage')
-		st.pyplot(fig8)
-	with col5:
-		st.text('Annual Usage Plot Bad Customer')
-		sns.set_theme(style="whitegrid")
-		fig9 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Residential Annual Usage')
-		st.pyplot(fig9)
-	with col6:
-		st.text('Annual Usage Plot Good Customer')
-		sns.set_theme(style="whitegrid")
-		fig10 = plt.figure(figsize=(10,10))
-		sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Residential Annual Usage')
-		st.pyplot(fig10)
+	if datav == 'Season':	
+		with col5:
+			st.text('Seasonal Usage Bad Plot')
+			sns.set_theme(style="whitegrid")
+			fig3 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Customer Seasonal Usage')
+			st.pyplot(fig3)
+		with col6:
+			st.text('Seasonal Usage Good Plot')
+			sns.set_theme(style="whitegrid")
+			fig4 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
+			st.pyplot(fig4)
+	elif datav =='Weekdays':	
+		with col5:
+			st.text('Daily Usage Plot Bad Customer')
+			sns.set_theme(style="whitegrid")
+			fig5 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
+			st.pyplot(fig5)
+			#st.text('Seasonal Plot')
+		with col6:
+			st.text('Daily Usage Plot Good Customer ')
+			sns.set_theme(style="whitegrid")
+			fig6 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
+			st.pyplot(fig6)
+			#st.text('Seasonal Plot')
+	elif datav =='Month':
+		with col5:
+			st.text('Monthly Usage Plot Bad Customer')
+			sns.set_theme(style="whitegrid")
+			fig7 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Month']).set(title='Bad Residential Monthly Usage')
+			st.pyplot(fig7)
+		with col6:
+			st.text('Monthly Usage Plot Good Customer')
+			sns.set_theme(style="whitegrid")
+			fig8 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Residential Monthly Usage')
+			st.pyplot(fig8)
+	elif datav =='Year':
+		with col5:
+			st.text('Annual Usage Plot Bad Customer')
+			sns.set_theme(style="whitegrid")
+			fig9 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Residential Annual Usage')
+			st.pyplot(fig9)
+		with col6:
+			st.text('Annual Usage Plot Good Customer')
+			sns.set_theme(style="whitegrid")
+			fig10 = plt.figure(figsize=(10,10))
+			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Residential Annual Usage')
+			st.pyplot(fig10)
 with ddis:
 	
 	st.subheader('Usage Data Distribution')
