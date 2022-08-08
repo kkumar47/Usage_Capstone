@@ -316,6 +316,7 @@ with pmodel:
 	xp=compm.transpose().to_numpy()
 	xp= np.array(xp)
 	st.write(xp.shape)
+	st.write(xp)
 	#pred_op = model.predict(xp)
 	st.write('End')
 	#st.write(type(pred_op))
