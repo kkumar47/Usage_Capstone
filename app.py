@@ -312,7 +312,8 @@ with pmodel:
 	compc = gooddf.append(bad_f, ignore_index=True)
 	compm = compc.loc[compc['Meter'] == datap][['Meter','Date','Hr','Usage']]
 	st.dataframe(compm)
-	
+	compm = compm.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
+	st.write(compm)
 	
 	
 	
