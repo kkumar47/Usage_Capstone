@@ -72,7 +72,6 @@ with rawdata:
 	
 with pprocess:
 	st.subheader("Preprocess Dataset")
-	st.write('Processing Data please wait....')
 	@st.cache
 	def cleanse(baddf):
 		baddf['Date'] = baddf['Day'].apply(lambda x: pd.to_datetime((2009*1000 )+ x, format = "%Y%j") if x<=365 else pd.to_datetime((2010*1000 )+ (x-365), format = "%Y%j"))
