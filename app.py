@@ -14,7 +14,7 @@ from sklearn.model_selection import train_test_split
 import random
 from tensorflow.keras.optimizers import SGD, Adam
 from keras.models import Sequential
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix,classification_report
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Dense, Dropout, Activation, Flatten,  BatchNormalization, Conv1D,MaxPooling1D
 
@@ -295,7 +295,9 @@ with emodel:
 	ax.set_xlabel('Predicted Class')
 	ax.set_ylabel('Actual Class')
 	st.pyplot(fig14)
-	st.write(result)
+	report = classification_report(y_test, Pred_Test)
+	st.write(report)
+	#st.write(result)
 	#Predhat = model.predict_classes(X_test, verbose=0)
 	#Pred = Pred[:, 0]
 	#Predhat = Predhat[:, 0]
