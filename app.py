@@ -315,7 +315,8 @@ with pmodel:
 	compm = compm.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
 	xp=compm.transpose().to_numpy()
 	xp= np.array(xp)
-	st.write(xp)
+	pred_op = model.predict(xp)
+	st.write(pred_op)
 	
 	
 	
