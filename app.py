@@ -318,9 +318,9 @@ with pmodel:
 	st.write(xp.shape)
 	xp =xp.reshape(1, 536,24)
 	st.write(xp.shape)
-	#pred_op = model.predict(xp)
-	st.write('End')
-	#st.write(type(pred_op))
+	pred_op = model.predict(xp)
+	
+	st.write(type(pred_op))
 
 	
 	
