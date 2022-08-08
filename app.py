@@ -308,6 +308,7 @@ with pmodel:
 	gcl = gooddf['Meter'].unique().tolist()
 	bcl = bad_f['Meter'].unique().tolist()
 	cl = gcl+bcl
+	cl =cl.remove(7322)
 	datap = st.selectbox('Select Meter to Predict',cl, index=0, help='Select Meter for which Prediction needs to be made')
 	compc = gooddf.append(bad_f, ignore_index=True)
 	compm = compc.loc[compc['Meter'] == datap][['Meter','Date','Hr','Usage']]
@@ -317,11 +318,13 @@ with pmodel:
 	xp= np.array(xp)
 	st.write(xp.shape)
 	xp =xp.reshape(1, 536,24)
-	st.write(xp.shape)
 	pred_op = model.predict(xp)
-	
-	st.write((pred_op))
-	st.write(np.argmax(pred_op))
+	#st.write((pred_op))
+	finalo = np.argmax(pred_op)
+	if finalo ==0:
+		st.write('Customer may involve in Energy Theft!!')
+	elif finalo ==1:
+		st.write('Good Customer')
 
 	
 	
