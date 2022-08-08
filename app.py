@@ -33,6 +33,7 @@ ttsplit = st.container()
 dmodel = st.container()
 tmodel = st.container()
 emodel = st.container()
+pmodel = st.container()
 
 with header:
 	font="sans serif"
@@ -301,6 +302,13 @@ with emodel:
 	#Predhat = model.predict_classes(X_test, verbose=0)
 	#Pred = Pred[:, 0]
 	#Predhat = Predhat[:, 0]
+	
+with pmodel:
+	st.subheader('Predict Customer Type')
+	gcl = gooddf['Meter'].unique().tolist()
+	bcl = bad_f['Meter'].unique().tolist()
+	cl = gcl+bcl
+	datap = st.selectbox('Enter Meter to Predict',cl, index=0, help='Select Meter for which Prediction needs to be made')
 	
 	
 	
