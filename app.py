@@ -5,6 +5,8 @@ import seaborn as sns
 import numpy as np
 import datetime
 import requests
+import base64
+from fpdf import FPDF
 import calendar
 from io import StringIO
 from sklearn.preprocessing import MinMaxScaler
