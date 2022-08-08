@@ -295,6 +295,11 @@ with emodel:
 	ax.set_xlabel('Predicted Class')
 	ax.set_ylabel('Actual Class')
 	st.pyplot(fig14)
+	st.write(result)
+	#Predhat = model.predict_classes(X_test, verbose=0)
+	#Pred = Pred[:, 0]
+	#Predhat = Predhat[:, 0]
+	
 	
 	
 	
