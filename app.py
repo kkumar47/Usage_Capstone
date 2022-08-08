@@ -308,7 +308,10 @@ with pmodel:
 	gcl = gooddf['Meter'].unique().tolist()
 	bcl = bad_f['Meter'].unique().tolist()
 	cl = gcl+bcl
-	datap = st.selectbox('Enter Meter to Predict',cl, index=0, help='Select Meter for which Prediction needs to be made')
+	datap = st.selectbox('Select Meter to Predict',cl, index=0, help='Select Meter for which Prediction needs to be made')
+	compc = gooddf.append(bad_f, ignore_index=True)
+	compm = compc.loc[compc['Meter'] == datap][['Meter','Date','Hr','Usage']]
+	st.dataframe(compm)
 	
 	
 	
