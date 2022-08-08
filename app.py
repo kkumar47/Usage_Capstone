@@ -126,7 +126,7 @@ with ousage:
 with eda:
 	
 	st.subheader('Data Visuals')
-	datav = st.selectbox('At what level Do you want the Usage report?',('Season','Weekdays','Month','Year', 'Hourly'), index=0, help='Select Visualization')	
+	datav = st.selectbox('At what level Do you want the Usage report?',('Season','Weekdays','Month','Year'), index=0, help='Select Visualization')	
 	col5, col6=st.columns(2)
 	if datav == 'Season':	
 		with col5:
