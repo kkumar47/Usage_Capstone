@@ -321,6 +321,7 @@ with pmodel:
 	pred_op = model.predict(xp)
 	
 	st.write((pred_op))
+	st.write(np.argmax(pred_op))
 
 	
 	
