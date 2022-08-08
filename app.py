@@ -315,10 +315,10 @@ with pmodel:
 	compm = compm.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
 	xp=compm.transpose().to_numpy()
 	xp= np.array(xp)
-	st.write('Begin')
-	pred_op = model.predict(xp)
+	st.write(xp.shape)
+	#pred_op = model.predict(xp)
 	st.write('End')
-	st.write(type(pred_op))
+	#st.write(type(pred_op))
 
 	
 	
