@@ -313,7 +313,7 @@ with pmodel:
 	compm = compc.loc[compc['Meter'] == datap][['Meter','Date','Hr','Usage']]
 	st.dataframe(compm)
 	compm = compm.pivot_table(index=('Meter','Hr'), columns='Date', values='Usage',aggfunc='sum')
-	xp=compm.loc[i,:].transpose().to_numpy()
+	xp=compm.transpose().to_numpy()
 	xp= np.array(xp)
 	st.write(xp)
 	
