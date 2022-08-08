@@ -320,7 +320,7 @@ with pmodel:
 	st.write(xp.shape)
 	pred_op = model.predict(xp)
 	
-	st.write(type(pred_op))
+	st.write((pred_op))
 
 	
 	
