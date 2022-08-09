@@ -115,8 +115,15 @@ with ousage:
 	with col1:
 		sns.set_theme(style="whitegrid")
 		fig1 = plt.figure(figsize=(10,10))
-		sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
+		snsp=sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
+		plt.savefig('ouputu.png')
 		st.pyplot(fig1)
+		with open("ouputu.png", "rb") as file:
+     			btn = st.download_button(
+             		label="Download Plot",
+             		data=file,
+             		file_name="Bad Customer Overall Usage.png",
+             		mime="image/png")
 	with col2:
 		sns.set_theme(style="whitegrid")
 		fig2 = plt.figure(figsize=(10,10))
@@ -125,9 +132,9 @@ with ousage:
 		st.pyplot(fig2)
 		with open("ouput.png", "rb") as file:
      			btn = st.download_button(
-             		label="Download image",
+             		label="Download Plot",
              		data=file,
-             		file_name="fig2.png",
+             		file_name="Good Customer Overall Usage.png",
              		mime="image/png")
            		
 			
