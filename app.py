@@ -115,10 +115,10 @@ with ousage:
 	with col1:
 		sns.set_theme(style="whitegrid")
 		fig1 = plt.figure(figsize=(10,10))
-		snsp=sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
-		plt.savefig('ouputu.png')
+		snsa=sns.barplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Overall Usage')
+		plt.savefig('ouputa.png')
 		st.pyplot(fig1)
-		with open("ouputu.png", "rb") as file:
+		with open("ouputa.png", "rb") as file:
      			btn = st.download_button(
              		label="Download Plot",
              		data=file,
@@ -127,10 +127,10 @@ with ousage:
 	with col2:
 		sns.set_theme(style="whitegrid")
 		fig2 = plt.figure(figsize=(10,10))
-		snsp = sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
-		plt.savefig('ouput.png')
+		snsb = sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
+		plt.savefig('ouputb.png')
 		st.pyplot(fig2)
-		with open("ouput.png", "rb") as file:
+		with open("ouputb.png", "rb") as file:
      			btn = st.download_button(
              		label="Download Plot",
              		data=file,
@@ -150,29 +150,55 @@ with eda:
 			st.text('Seasonal Usage Bad Plot')
 			sns.set_theme(style="whitegrid")
 			fig3 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Customer Seasonal Usage')
+			snsc = sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Season']).set(title='Bad Customer Seasonal Usage')
+			plt.savefig('ouputc.png')
 			st.pyplot(fig3)
+			with open("ouputc.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Bad Customer Seasonal Usage.png",
+             			mime="image/png")
 		with col6:
 			st.text('Seasonal Usage Good Plot')
 			sns.set_theme(style="whitegrid")
 			fig4 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
+			snsd = sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Season']).set(title='Good Customer Seasonal Usage')
+			plt.savefig('ouputd.png')
 			st.pyplot(fig4)
+			with open("ouputd.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Good Customer Seasonal Usage.png",
+             			mime="image/png")
 	elif datav =='Weekdays':	
 		with col5:
 			st.text('Daily Usage Plot Bad Customer')
 			sns.set_theme(style="whitegrid")
 			fig5 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
+			snse = sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Dayname']).set(title='Bad Customer Daily Usage')
+			plt.savefig('oupute.png')
 			st.pyplot(fig5)
-			#st.text('Seasonal Plot')
+			with open("oupute.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Bad Customer Daily Usage.png",
+             			mime="image/png")
 		with col6:
 			st.text('Daily Usage Plot Good Customer ')
 			sns.set_theme(style="whitegrid")
 			fig6 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
+			snsf = sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Dayname']).set(title='Good Customer Daily Usage')
+			plt.savefig('ouputf.png')
 			st.pyplot(fig6)
-			#st.text('Seasonal Plot')
+			with open("ouputf.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Good Customer Daily Usage.png",
+             			mime="image/png")
 	elif datav =='Month':
 		with col5:
 			st.text('Monthly Usage Plot Bad Customer')
