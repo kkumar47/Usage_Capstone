@@ -204,27 +204,55 @@ with eda:
 			st.text('Monthly Usage Plot Bad Customer')
 			sns.set_theme(style="whitegrid")
 			fig7 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Month']).set(title='Bad Residential Monthly Usage')
+			snsg = sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Month']).set(title='Bad Customer Monthly Usage')
+			plt.savefig('ouputg.png')
 			st.pyplot(fig7)
+			with open("ouputg.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Bad Customer Monthly Usage.png",
+             			mime="image/png")
 		with col6:
 			st.text('Monthly Usage Plot Good Customer')
 			sns.set_theme(style="whitegrid")
 			fig8 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Residential Monthly Usage')
+			snsh =sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Month']).set(title='Good Customer Monthly Usage')
+			plt.savefig('ouputh.png')
 			st.pyplot(fig8)
+			with open("ouputh.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Good Customer Monthly Usage.png",
+             			mime="image/png")
 	elif datav =='Year':
 		with col5:
 			st.text('Annual Usage Plot Bad Customer')
 			sns.set_theme(style="whitegrid")
 			fig9 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Residential Annual Usage')
+			snsi = sns.lineplot(x=bad_f['Hr'], y=bad_f['Usage'], hue=bad_f['Year']).set(title='Bad Customer Annual Usage')
+			plt.savefig('ouputi.png')
 			st.pyplot(fig9)
+			with open("ouputi.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Bad Customer Annual Usage.png",
+             			mime="image/png")
 		with col6:
 			st.text('Annual Usage Plot Good Customer')
 			sns.set_theme(style="whitegrid")
 			fig10 = plt.figure(figsize=(10,10))
-			sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Residential Annual Usage')
+			snsj = sns.lineplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Annual Usage')
+			plt.savefig('ouputj.png')
 			st.pyplot(fig10)
+			with open("ouputj.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Good Customer Annual Usage.png",
+             			mime="image/png")
 with ddis:
 	
 	st.subheader('Usage Data Distribution')
@@ -232,13 +260,27 @@ with ddis:
 	with col7:
 		st.text('Usage Distribution Bad Customer')
 		fig11 = plt.figure(figsize=(10,10))
-		sns.histplot(data=bad_f, x=bad_f['Usage'],binwidth=5, kde=True)
+		snsk = sns.histplot(data=bad_f, x=bad_f['Usage'],binwidth=5, kde=True)
+		plt.savefig('ouputk.png')
 		st.pyplot(fig11)
+		with open("ouputk.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Usage Distribution Bad Customer.png",
+             			mime="image/png")
 	with col8:
 		st.text('Usage Distribution Good Customer')
 		fig12 = plt.figure(figsize=(10,10))
-		sns.histplot(data=gooddf, x=gooddf['Usage'], binwidth=5,kde=True)
+		snsl = sns.histplot(data=gooddf, x=gooddf['Usage'], binwidth=5,kde=True)
+		plt.savefig('ouputl.png')
 		st.pyplot(fig12)
+		with open("ouputl.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Usage Distribution Good Customer.png",
+             			mime="image/png")
 		
 with dprep:
 	
@@ -320,6 +362,13 @@ with tmodel:
 	plt.xlabel("Epoch #")
 	plt.ylabel("Accuracy")
 	plt.title("Training Accuracy")
+	plt.savefig("ouputm.png")
+	with open("ouputm.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Model Accuracy.png",
+             			mime="image/png")
 	st.pyplot(fig13)
 
 with emodel:
