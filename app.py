@@ -120,9 +120,10 @@ with ousage:
 	with col2:
 		sns.set_theme(style="whitegrid")
 		fig2 = plt.figure(figsize=(10,10))
-		sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
+		snsp = sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
+		plt.savefig('ouput.png')
 		st.pyplot(fig2)
-		with open("fig2.png", "rb") as file:
+		with open("ouput.png", "rb") as file:
      			btn = st.download_button(
              		label="Download image",
              		data=file,
