@@ -363,13 +363,14 @@ with tmodel:
 	plt.ylabel("Accuracy")
 	plt.title("Training Accuracy")
 	plt.savefig("ouputm.png")
+	st.pyplot(fig13)
 	with open("ouputm.png", "rb") as file:
      				btn = st.download_button(
              			label="Download Plot",
              			data=file,
              			file_name="Model Accuracy.png",
              			mime="image/png")
-	st.pyplot(fig13)
+	
 
 with emodel:
 	st.subheader('Model Evaluation')
@@ -382,10 +383,17 @@ with emodel:
 	result =confusion_matrix(Actual_Test,Pred_Test)
 	
 	fig14,ax = plt.subplots(figsize=(10,10))
-	sns.heatmap(result, annot=True, ax=ax)
+	snsn = sns.heatmap(result, annot=True, ax=ax)
 	ax.set_xlabel('Predicted Class')
 	ax.set_ylabel('Actual Class')
+	plt.savefig("ouputn.png")
 	st.pyplot(fig14)
+	with open("ouputn.png", "rb") as file:
+     				btn = st.download_button(
+             			label="Download Plot",
+             			data=file,
+             			file_name="Model Evaluation Heatmap.png",
+             			mime="image/png")
 	report = classification_report(y_test, Pred_Test)
 	st.write(report)
 	#st.write(result)
