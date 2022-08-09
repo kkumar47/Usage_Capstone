@@ -122,6 +122,13 @@ with ousage:
 		fig2 = plt.figure(figsize=(10,10))
 		sns.barplot(x=gooddf['Hr'], y=gooddf['Usage'], hue=gooddf['Year']).set(title='Good Customer Overall Usage')
 		st.pyplot(fig2)
+		with open("fig2.png", "rb") as file:
+     			btn = st.download_button(
+             		label="Download image",
+             		data=file,
+             		file_name="fig2.png",
+             		mime="image/png")
+           		
 			
 
 
