@@ -386,13 +386,14 @@ with emodel:
 	snsn = sns.heatmap(result, annot=True, ax=ax)
 	ax.set_xlabel('Predicted Class')
 	ax.set_ylabel('Actual Class')
+	ax.set_title('Confusion Matrix')
 	plt.savefig("ouputn.png")
 	st.pyplot(fig14)
 	with open("ouputn.png", "rb") as file:
      				btn = st.download_button(
              			label="Download Plot",
              			data=file,
-             			file_name="Model Evaluation Heatmap.png",
+             			file_name="Confusion Matrix.png",
              			mime="image/png")
 	report = classification_report(y_test, Pred_Test)
 	st.write(report)
