@@ -9,7 +9,7 @@ import base64
 from fpdf import FPDF
 import calendar
 from io import StringIO
-#from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 import random
 from tensorflow.keras.optimizers import SGD, Adam
